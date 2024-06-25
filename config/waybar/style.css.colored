@@ -84,7 +84,7 @@ button:hover {
 }
 
 #clock {
-    color: #{COL3};
+    color: #FDD6B8;
 }
 
 #window {
@@ -134,4 +134,3 @@ label:focus {
 #pulseaudio.muted {
     color: @text;
 }
-

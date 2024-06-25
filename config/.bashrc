@@ -12,7 +12,9 @@ alias cava='cava -p ~/dotfiles/config/cava/config'
 alias cdots='cd ~/dotfiles/config'
 alias dots='cd ~/dotfiles'
 
-alias ls='ls --color=auto -a -l --block-size=M'
+alias ls='ls --color=auto -a -lh'
 alias grep='grep --color=auto'
 
 PS1='[\u@\h \W]\$ '
+
+cat ~/.cache/wal/sequences

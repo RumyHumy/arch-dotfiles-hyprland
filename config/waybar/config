@@ -1,72 +1,93 @@
 {
-  "layer": "top", // don't dim in special workspaces
-
-  "modules-left": [
-    "hyprland/workspaces",
-  ],
-
-  "modules-center": [],
-
-  "modules-right": [
-    "battery",
-    "pulseaudio",
-    "hyprland/language",
-    "clock",
-  ],
-
-  "hyprland/workspaces": {
-    "format": "●",
-  },
-
-  "battery": {
-    "format": "{icon} {capacity}%",
-    "tooltip-format": "{timeTo} | {power}w",
-    "format-icons": [ "󰂃", "󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹" ],
-
-    "states": {
-      "critical": 10,
-      "warning": 25,
-      "low": 50,
-      "full": 100,
-    },
-  },
-
-  // TODO: replace with pipewire
-  "pulseaudio": {
-    "format": "{format_source}{icon} {volume}%",
-    "format-muted": "{format_source}󰝟",
-
-    "format-source": "<span color='#D67C8E'>󰍬 on</span>  ",  // red
-    "format-source-muted": "",
-
-    "format-icons": {
-      "default": [ "🔈", "🔉", "🔊", "🗣️" ],
-    },
-
-    "tooltip": false,
-    "on-click": "pavucontrol",
-    "on-click-right": "pamixer --default-source --toggle-mute",
-  },
-
-  "hyprland/language": {
-    "format": "󰌌 {}",
-    "format-en": "us",
-    "format-ru": "ru",
-    "format-th": "th",
-
-    "keyboard-name": "keyd-virtual-keyboard",
-
-    "on-click": "hyprctl keyword input:kb_layout us,ru",
-    "on-click-right": "hyprctl keyword input:kb_layout us,th",
-  },
-
-  "clock": {
-    "timezone": "Asia/Bangkok",
-    "format": "󰅐 {:%H:%M}",
-
-    "tooltip": true,
-    "tooltip-format": "{:%e %B, %A}",  // 2 April, Saturday
-
-    "on-click": "footclient --hold when ci"
-  },
+    "margin-top" : 5,
+        "margin-left": 10,
+        "margin-right": 10,
+        "height" : 30,
+        "modules-left": [
+            "hyprland/window"
+        ],
+        "modules-center": [
+            "hyprland/workspaces",
+        ],
+        "modules-right": [
+            "pulseaudio",
+            "network",
+            "temperature",
+            "battery",
+            "clock",
+        ],
+        "hyprland/window": {
+            "format": "{}",
+            "max-length": 35,
+            "rewrite": {
+  		"": "Hyprland"
+  	},
+            "separate-outputs": true,
+        },
+        "hyprland/workspaces": {
+            "format": "{icon}",
+            "on-click": "activate",
+            "format-icons": {
+                "active": "*",
+            },
+            "sort-by-number": true,
+            "persistent-workspaces": {
+                "*": 4, // 5 workspaces by default on every monitor
+                "HDMI-A-1": 3 // but only three on HDMI-A-1
+            },
+        },
+        "clock": {
+            "timezone": "Etc/GMT0", // WTF GIVES GMT+3
+            "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+            "format": "{:%Y-%m-%d <b>%H:%M</b>}",
+            "format-alt": "{:%Y-%m-%d}" 
+        },
+        "cpu": {
+            "format": "  {usage}%",
+            "tooltip": false
+        },
+        "memory": {
+            "format": "{}%  "
+        },
+        "temperature": {
+            "critical-threshold": 80,
+            "format": "{icon} {temperatureC}°C",
+            "format-icons": ["", "", ""]
+        },
+        "battery": {
+            "states": {
+                "warning": 30,
+                "critical": 15
+            },
+            "format": "{icon}  {capacity}%",
+            "format-full": "{icon}  {capacity}%",
+            "format-charging": "  {capacity}%",
+            "format-plugged": "  {capacity}%",
+            "format-alt": "{time} {icon}",
+            "format-icons": ["", "", "", "", ""]
+        },
+        "network": {
+            "format-wifi": "  {signalStrength}%",
+            "format-ethernet": "{cidr} ",
+            "tooltip-format": "{ifname} via {gwaddr} ",
+            "format-linked": "{ifname} (No IP) ",
+            "format-disconnected": " ⚠ ",
+            "format-alt": "{ifname}: {ipaddr}/{cidr}"
+        },
+        "pulseaudio": {
+            "format": "{icon}  {volume}%",
+            "format-bluetooth": "{volume}% {icon} {format_source}",
+            "format-bluetooth-muted": " {icon} {format_source}",
+            "format-muted": " {format_source}",
+            "format-icons": {
+                "headphone": "",
+                "hands-free": "",
+                "headset": "",
+                "phone": "",
+                "portable": "",
+                "car": "",
+                "default": ["", "", ""]
+            },
+            "on-click": "pavucontrol"
+        },
 }

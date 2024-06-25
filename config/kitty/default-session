@@ -1,6 +1,0 @@
-# Startup session
-# https://sw.kovidgoyal.net/kitty/overview/#startup-sessions
-
-cd ~
-launch bash --rcfile dotfiles/config/.bashrc
-

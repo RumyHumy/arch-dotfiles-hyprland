@@ -40,11 +40,10 @@ monitor=eDP-1,preferred,0x0,1.5
 # See https://wiki.hyprland.org/Configuring/Keywords/
 
 # Set programs that you use
-$update = ~/dotfiles/config/update.sh
-$terminal = kitty
+$terminal = kitty --session ~/dotfiles/config/kitty/default-session -c ~/dotfiles/config/kitty/kitty.conf
 $fileManager = dolphin
-$menu = rofi -show drun
-$launch-waybar = ~/dotfiles/launch-waybar.sh
+$menu = rofi -show drun -config ~/dotfiles/config/rofi/theme.rasi
+$launch-waybar = ~/dotfiles/config/waybar/launch.sh
 $wallpapers = ~/dotfiles/config/wallpapers.sh 2
 $update-colors = ~/dotfiles/config/update-colors.sh
 
@@ -60,7 +59,7 @@ $update-colors = ~/dotfiles/config/update-colors.sh
 # exec-once = waybar & hyprpaper & firefox
 
 exec-once = $launch-waybar
-# exec-once = sleep 1 && $wallpapers &
+exec-once = sleep 1 && $wallpapers &
 
 #############################
 ### ENVIRONMENT VARIABLES ###
@@ -86,8 +85,8 @@ general {
     border_size = 2
 
     # https://wiki.hyprland.org/Configuring/Variables/#variable-types for info about colors
-    col.active_border = rgba({COL6}ee) rgba({COL7}ee) 45deg
-    col.inactive_border = rgba({COL2}aa)
+    col.active_border = rgba(33ccffee) rgba(00ff99ee) 45deg
+    col.inactive_border = rgba(595959aa)
 
     # Set to true enable resizing windows by clicking and dragging on borders and gaps
     resize_on_border = false 
@@ -200,7 +199,6 @@ device {
 $mainMod = SUPER # Sets "Windows" key as main modifier
 
 # Config bindings
-bind = $mainMod ALT, U, exec, $update
 bind = $mainMod ALT, W, exec, $wallpapers
 bind = $mainMod ALT, C, exec, $update-colors
 bind = $mainMod ALT, B, exec, $launch-waybar
